@@ -18,6 +18,7 @@
   'use strict'
 
 var lazyLoad = {};
+var supports = window.IntersectionObserver;
 var config;
 
 // The lazyload config
@@ -39,7 +40,7 @@ lazyLoad.destroy = function() {
  * @public
  * @param {Object} options User settings
  */
-lazyLoad.init = function(options) {
+lazyLoad.init = function(options) {    
   lazyLoad.destroy();
   
   // @todo use extend instead of a foreach
@@ -48,6 +49,12 @@ lazyLoad.init = function(options) {
   });
   
   var images = document.querySelectorAll('[data-src]');
+  
+  if (!supports) {
+    place(images);
+    return;
+  }
+  
   observe(defaults, images);
 }; 
 
@@ -59,7 +66,7 @@ lazyLoad.init = function(options) {
  */
 var observe = function(defaults, images) {
   // Set the IntersectionObserver
-  let observer = new IntersectionObserver(function (entries, self) {
+  var observer = new IntersectionObserver(function (entries, self) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         loadImage(entry.target);
@@ -75,16 +82,35 @@ var observe = function(defaults, images) {
 };
 
 /**
- * Load the images by placing the dat-src to the src
+ * Fallback for older browsers, just place the images.
  * @private
  * @param images
  */
-var loadImage = function(img) {
-  var src = img.getAttribute('data-src');
+var place = function(images) {
+  images.forEach(function(image) {
+    loadImage(image);
+  });
+}
 
-  if (!src) { return; }
+/**
+ * Load the images by placing the dat-src to the src
+ * @private
+ * @param elem
+ */
+var loadImage = function(elem) {
+  var dataSrc = elem.getAttribute('data-src');
 
-  img.src = src;
+  if (!dataSrc) {
+    return;
+  }
+  
+  if (elem.tagName == 'IMG') {
+    elem.src = dataSrc;
+  } else {
+    elem.style.backgroundImage = 'url('+dataSrc+')';
+  }
+  
+  elem.classList.add('is-lazyloaded');
 }
 
 return lazyLoad;
