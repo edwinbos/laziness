@@ -22,7 +22,7 @@ var supports = window.IntersectionObserver;
 var config;
 
 // The lazyload config
-const defaults = {
+var defaults = {
   rootMargin: '100px 0px 0px 0px',
   threshold: 0
 };
@@ -68,6 +68,13 @@ var observe = function(defaults, images) {
   // Set the IntersectionObserver
   var observer = new IntersectionObserver(function (entries, self) {
     entries.forEach(function(entry) {
+
+      // isIntersecting property of IntersectionObserverEntry was not implemented, returning undefined
+      if (entry.isIntersecting === undefined) {
+        place(images);
+        return;
+      }
+      
       if (entry.isIntersecting) {
         loadImage(entry.target);
         self.unobserve(entry.target);
