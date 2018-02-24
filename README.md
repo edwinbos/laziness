@@ -34,10 +34,11 @@ Background images works the same as default images, if set on a non img-element.
 
 ### Browser support
 If the browser supports the InteractionObserver the API is used, but if the browser not supports the InteractionObserver all the images are placed on load.
+
 |Browser|Using InteractionObserver|Just place the images|
 |---|---|---|
-|Chrome|51+|-
-|Firefox|55+|-
+|Chrome|51+|-|
+|Firefox|55+|-|
 |Edge|16+|15+|
 |Safari|Not supported|9,10,11?|
 |Opera|38+|-|
