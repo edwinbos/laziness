@@ -1,6 +1,6 @@
 {
   "name": "@edwinbos/laziness",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "Lazy loading of images using the Interaction Observer API that is providing observing changes asynchronously",
   "main": "lazyload.js",
   "repository": {
