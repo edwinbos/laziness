@@ -49,6 +49,7 @@ Use lazyload on src-set. Use *data-srcset* instead of *srcset*:
                  1509px"
      data-src="https://www.example.com/550.jpg" alt="Loch Ness" class="lazyload"
 />
+```
 
 #### Background images
 Background images works the same as default images, if set on a non img-element.

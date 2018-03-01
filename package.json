@@ -1,0 +1,19 @@
+{
+  "name": "@edwinbos/laziness",
+  "version": "0.4.0",
+  "description": "Lazy loading of images using the Interaction Observer API that is providing observing changes asynchronously",
+  "main": "lazyload.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edwinbos/laziness.git"
+  },
+  "keywords": [
+    "lazyload"
+  ],
+  "author": "Edwin Bos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edwinbos/laziness/issues"
+  },
+  "homepage": "https://www.edwinbos.nl/laziness/"
+}
