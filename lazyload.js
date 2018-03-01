@@ -1,6 +1,3 @@
-// Lazyloading of images with IntersectionObserver
-// https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-
 (function(root, lazyload) {
   if (typeof define === 'function' && define.amd) {
       // AMD. Register lazyload as an anonymous module
@@ -48,7 +45,7 @@ lazyLoad.init = function(options) {
     defaults[key] = options[key];
   });
   
-  var images = document.querySelectorAll('[data-src]');
+  var images = document.querySelectorAll('.lazyload');
   
   if (!supports) {
     place(images);
@@ -105,16 +102,39 @@ var place = function(images) {
  * @param elem
  */
 var loadImage = function(elem) {
-  var dataSrc = elem.getAttribute('data-src');
+  var dataSrc = elem.getAttribute('data-src'),
+      dataSrcset = elem.getAttribute('data-srcset'),
+      dataSizes = elem.getAttribute('data-sizes'),
+      tagName = elem.tagName;
 
-  if (!dataSrc) {
+  if (!dataSrc && !dataSrcset && !tagName == 'PICTURE') {
     return;
   }
   
-  if (elem.tagName == 'IMG') {
-    elem.src = dataSrc;
-  } else {
-    elem.style.backgroundImage = 'url('+dataSrc+')';
+  if (dataSrc) {
+    if (tagName == 'IMG') {
+      elem.src = dataSrc;
+    } else {
+      elem.style.backgroundImage = 'url('+dataSrc+')';
+    }
+  }
+  
+  if (dataSrcset) {
+    if (tagName == 'IMG') {
+      elem.srcset = dataSrcset;
+      elem.sizes = dataSizes;
+    }
+  }
+  
+  if (tagName == 'PICTURE') {
+    var sourceElements = elem.getElementsByTagName('source'),
+        imgElement = elem.getElementsByTagName('img')[0];
+    
+    for (var i = 0; i < sourceElements.length; i++) {
+      sourceElements[i].srcset = sourceElements[i].getAttribute('data-srcset');
+    }
+    
+    imgElement.src = imgElement.getAttribute('data-src');
   }
   
   elem.classList.add('is-lazyloaded');
