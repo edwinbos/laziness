@@ -16,12 +16,12 @@ Add laziness to your head:
 
 And call the plugin:
 ```javascript
-    document.addEventListener('DOMContentLoaded', function() {
-        lazyLoad.init({
-            rootMargin: '300px 0px 0px 0px', // margin around the root
-            threshold: 0 // a value of 1.0 means that the threshold isn't considered passed until every pixel is visible
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    lazyLoad.init({
+        rootMargin: '300px 0px 0px 0px', // margin around the root
+        threshold: 0 // a value of 1.0 means that the threshold isn't considered passed until every pixel is visible
     });
+});
 ```
 
 #### Default images
