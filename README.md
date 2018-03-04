@@ -8,6 +8,22 @@ Lazy loading of images using the Interaction Observer API that is providing obse
 See the [Laziness demo](https://www.edwinbos.nl/laziness/).
 
 ### How to use Laziness
+Add laziness to your head:
+
+```html
+<script type="text/javascript" src="assets/js/laziness.js"></script>
+```
+
+And call the plugin:
+```javascript
+    document.addEventListener('DOMContentLoaded', function() {
+        lazyLoad.init({
+            rootMargin: '300px 0px 0px 0px', // margin around the root
+            threshold: 0 // a value of 1.0 means that the threshold isn't considered passed until every pixel is visible
+        });
+    });
+```
+
 #### Default images
 Use *data-src* instead of *src*:
 ```html
