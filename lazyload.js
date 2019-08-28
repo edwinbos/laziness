@@ -128,13 +128,16 @@ var loadImage = function(elem) {
   
   if (tagName == 'PICTURE') {
     var sourceElements = elem.getElementsByTagName('source'),
-        imgElement = elem.getElementsByTagName('img')[0];
+        imgElement = elem.getElementsByTagName('img')[0],
+        dataSrc = imgElement.getAttribute('data-src');
     
     for (var i = 0; i < sourceElements.length; i++) {
       sourceElements[i].srcset = sourceElements[i].getAttribute('data-srcset');
     }
     
-    imgElement.src = imgElement.getAttribute('data-src');
+    if (dataSrc) {
+      imgElement.src = dataSrc;
+    }
   }
   
   elem.classList.add('is-lazyloaded');
